@@ -1,0 +1,28 @@
+{
+  "name": "doctype_admin/settings",
+  "description": "Doctype Admin Panel Settings Plugin",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Pratik Shrestha",
+      "email": "pratikdai404@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "orchestra/testbench": "5.x-dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "doctype_admin\\Settings\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "doctype_admin\\Settings\\SettingsServiceProvider"
+      ]
+    }
+  }
+}
