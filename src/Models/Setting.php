@@ -3,6 +3,7 @@
 namespace doctype_admin\Settings\Models;
 
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Setting extends Model
@@ -19,5 +20,10 @@ class Setting extends Model
             5 => 'Select Dropdown',
             6 => 'Radio',
         ][$attribute];
+    }
+
+    public function setting_display_name()
+    {
+        return str_replace("_", " ", Str::upper($this->setting_name));
     }
 }

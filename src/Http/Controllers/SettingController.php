@@ -7,6 +7,7 @@ namespace doctype_admin\Settings\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use doctype_admin\Settings\Models\Setting;
+use Illuminate\Support\Str;
 
 class SettingController extends Controller
 {
@@ -18,7 +19,8 @@ class SettingController extends Controller
 
     public function store(Request $request)
     {
-        Setting::create($this->validateData());
+
+        Setting::create($this->data());
         return redirect(config('setting.prefix', 'admin') . '/' . 'setting');
     }
 
@@ -38,7 +40,7 @@ class SettingController extends Controller
         return redirect(config('setting.prefix', 'admin') . '/' . 'setting');
     }
 
-    public function delete(Setting $setting)
+    public function destroy(Setting $setting)
     {
         $setting->delete();
         return redirect(config('setting.prefix', 'admin') . '/' . 'setting');
@@ -47,9 +49,18 @@ class SettingController extends Controller
     public function validateData()
     {
         return request()->validate([
-            'setting_name' => 'required|max:255',
+            'setting_name' => 'required|max:255|unique:settings',
             'setting_type' => 'required|numeric',
             'custom' => 'sometimes'
         ]);
+    }
+
+    public function data()
+    {
+        $data = $this->validateData();
+        $setting_name = $data['setting_name'];
+        $valid_setting_name = str_replace(" ", "_", Str::lower($setting_name));
+        $data['setting_name'] = $valid_setting_name;
+        return $data;
     }
 }

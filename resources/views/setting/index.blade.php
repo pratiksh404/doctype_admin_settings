@@ -23,6 +23,7 @@
 </section>
 @stop
 
+
 @section('content')
 
 
@@ -33,7 +34,8 @@
                 <h3 class="card-title">Make Setting</h3>
             </div>
             <div class="card-body">
-                <form action="{{url('/setting')}}" method="post" enctype="multipart/form-data">
+                <form action="{{url(config('setting.prefix','admin').'/'.'setting')}}" method="post"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="row">
 
@@ -73,6 +75,11 @@
                         </div>
 
                     </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button type="submit" class="btn btn-primary btn-block">Create Setting</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -104,9 +111,21 @@
                             {{----------------- Text Field Input -----------------}}
                             @include('setting::setting.layouts.form_component.text')
                             {{-- ---------------------------------------------- --}}
+
+                            {{-----------------Rich Text Box Input -----------------}}
+                            @include('setting::setting.layouts.form_component.richtext')
+                            {{-- ---------------------------------------------- --}}
+
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-2 d-flex justify-content-around">
                             <button type="submit" class="btn btn-primary btn-block">Update</button>
+                            <button type="button" class="btn btn-danger" data-toggle="modal"
+                                data-target="#setting-{{$setting->id}}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            {{-- Delete Model --}}
+                            @include('setting::setting.layouts.confirm_delete')
+                            <!-- /.modal -->
                         </div>
                     </div>
                     <br>
@@ -130,6 +149,10 @@
 @section('js')
 <script>
     $(function () {
+
+    // Summernote
+    $('.textarea').summernote()
+    // Datatable
     $("#datatable").DataTable({
       "responsive": true,
       "autoWidth": true,
