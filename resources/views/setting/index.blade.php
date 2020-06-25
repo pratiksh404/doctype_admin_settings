@@ -103,7 +103,8 @@
                 @if (count($settings) > 0)
                 @foreach ($settings as $setting)
 
-                <form action="{{url(config('setting.prefix','admin').'/'.'setting').'/'.$setting->id}}" method="post">
+                <form action="{{url(config('setting.prefix','admin').'/'.'setting').'/'.$setting->id}}" method="post"
+                    enctype="multipart/form-data">
                     @method('PATCH')
                     @csrf
                     <div class="row">
@@ -116,21 +117,29 @@
                             @include('setting::setting.layouts.form_component.richtext')
                             {{-- ---------------------------------------------- --}}
 
+                            {{-----------------Image Input -----------------}}
+                            @include('setting::setting.layouts.form_component.image')
+                            {{-- ---------------------------------------------- --}}
+
+                            {{-----------------Checkbox Input -----------------}}
+                            @include('setting::setting.layouts.form_component.checkbox')
+                            {{-- ---------------------------------------------- --}}
+
                         </div>
                         <div class="col-lg-2 d-flex justify-content-around">
                             <button type="submit" class="btn btn-primary btn-block">Update</button>
-                            <button type="button" class="btn btn-danger" data-toggle="modal"
-                                data-target="#setting-{{$setting->id}}">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                            {{-- Delete Model --}}
-                            @include('setting::setting.layouts.confirm_delete')
-                            <!-- /.modal -->
                         </div>
                     </div>
                     <br>
                 </form>
-
+                <button type="button" class="btn btn-danger btn-block" data-toggle="modal"
+                    data-target="#setting-{{$setting->id}}">
+                    <i class="fas fa-trash"></i>
+                </button>
+                <hr>
+                {{-- Delete Model --}}
+                @include('setting::setting.layouts.confirm_delete')
+                <!-- /.modal -->
                 @endforeach
                 @endif
             </div>

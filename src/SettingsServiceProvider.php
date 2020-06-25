@@ -87,7 +87,7 @@ class SettingsServiceProvider extends ServiceProvider
     {
         $key = str_replace(['"', '\''], ' ', $key);
         $setting = \doctype_admin\Settings\Models\Setting::where('setting_name', trim($key))->first();
-        if ($setting->setting_type == "Text" || $setting->setting_type == "Image/File") {
+        if ($setting->setting_type == "Text" || $setting->setting_type == "Image") {
             return $setting->string_value;
         }
         if ($setting->setting_type == "Rich Text Box") {

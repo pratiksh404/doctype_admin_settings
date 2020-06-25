@@ -15,7 +15,7 @@ class Setting extends Model
         return [
             1 => 'Text',
             2 => 'Rich Text Box',
-            3 => 'Image/File',
+            3 => 'Image',
             4 => 'Checkbox',
             5 => 'Select Dropdown',
             6 => 'Radio',
