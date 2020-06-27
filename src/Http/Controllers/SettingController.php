@@ -21,7 +21,6 @@ class SettingController extends Controller
 
     public function store(Request $request)
     {
-        dd(array($request->setting_custom));
         Setting::create($this->data());
         Alert::success("Setting Created", "Success");
         return redirect(config('setting.prefix', 'admin') . '/' . 'setting');
@@ -57,7 +56,7 @@ class SettingController extends Controller
         return request()->validate([
             'setting_name' => 'required|max:255|unique:settings',
             'setting_type' => 'required|numeric',
-            'custom' => 'sometimes'
+            'setting_custom' => 'sometimes'
         ]);
     }
 

@@ -43,17 +43,16 @@
                             <input type="text" name="setting_name" id="setting_name" class="form-control"
                                 placeholder="Setting's Name">
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-2">
                             <select name="setting_type" id="setting_type" class="form-control">
                                 <option value="1">Text</option>
                                 <option value="2">Rich Text Box</option>
-                                <option value="3">Image/File</option>
-                                <option value="4">Checkbox</option>
-                                <option value="5">Select Dropdown</option>
-                                <option value="6">Radio</option>
+                                <option value="3">Image</option>
+                                <option value="4">Select Dropdown</option>
+
                             </select>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <div class="card card-outline card-primary collapsed-card">
                                 <div class="card-header">
                                     <h3 class="card-title">Custom</h3>
@@ -66,8 +65,9 @@
                                     <!-- /.card-tools -->
                                 </div>
                                 <!-- /.card-header -->
-                                <div class="card-body">
-                                    <textarea name="setting_custom" id="setting_custom" cols="30" rows="10"></textarea>
+                                <div class="card-body" style="min-height:10vh;height:auto">
+                                    <input type="hidden" name="setting_custom" id="setting_custom">
+                                    <div id="editor"></div>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -121,8 +121,8 @@
                             @include('setting::setting.layouts.form_component.image')
                             {{-- ---------------------------------------------- --}}
 
-                            {{-----------------Checkbox Input -----------------}}
-                            @include('setting::setting.layouts.form_component.checkbox')
+                            {{-----------------Select Input -----------------}}
+                            @include('setting::setting.layouts.form_component.select')
                             {{-- ---------------------------------------------- --}}
 
                         </div>
@@ -152,15 +152,41 @@
 @stop
 
 @section('css')
+<style>
+    #editor {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+</style>
 <link rel="stylesheet" href="{{asset('css/admin_custom.css')}}">
 @stop
 
 @section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.11/ace.js"></script>
 <script>
     $(function () {
+/* Ace Editor JSON mode */
+      var editor = ace.edit("editor");
+                editor.getSession().setMode("ace/mode/html");
+                editor.setTheme("ace/theme/chrome");
+                editor.getSession().setTabSize(2);
+                editor.getSession().setUseWrapMode(true);
+
+
+     var input = $('input[name="setting_custom"]');
+        editor.getSession().on("change", function () {
+        input.val(editor.getSession().getValue());
+        });
+
+// Select2
+$('.select2').select2()
 
     // Summernote
-    $('.textarea').summernote()
+    $('.textarea').summernote();
+
     // Datatable
     $("#datatable").DataTable({
       "responsive": true,
