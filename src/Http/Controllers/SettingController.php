@@ -15,7 +15,10 @@ class SettingController extends Controller
 {
     public function index()
     {
-        $settings = Setting::all(); /* Setting::all(); */
+        $settings = Setting::all()->map(function ($item) {
+            $item->setting_custom = json_decode($item->setting_custom);
+            return $item;
+        }); /* Setting::all(); */
         return view('setting::setting.index', compact('settings'));
     }
 
@@ -63,6 +66,7 @@ class SettingController extends Controller
     public function data()
     {
         $data = $this->validateData();
+        /* -----------setting_name------------- */
         $setting_name = $data['setting_name'];
         $valid_setting_name = str_replace(" ", "_", Str::lower($setting_name));
         $data['setting_name'] = $valid_setting_name;

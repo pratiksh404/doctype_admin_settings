@@ -15,6 +15,7 @@ class CreateSettingsTable extends Migration
             $table->string('string_value')->nullable();
             $table->integer('integer_value')->nullable();
             $table->text('text_value')->nullable();
+            $table->boolean('boolean_value')->default(true);
             $table->integer('setting_type');
             $table->string('setting_custom')->nullable();
             $table->timestamps();

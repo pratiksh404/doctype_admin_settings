@@ -17,6 +17,9 @@ class Setting extends Model
             2 => 'Rich Text Box',
             3 => 'Image',
             4 => 'Select Dropdown',
+            5 => 'Radio',
+            6 => 'Checkbox',
+            7 => 'Custom'
         ][$attribute];
     }
 
