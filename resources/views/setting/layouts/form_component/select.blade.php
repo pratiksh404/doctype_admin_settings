@@ -2,7 +2,7 @@
 @if (isset($setting->setting_custom->options))
 <select name="integer_value" id="select_value {{$setting->setting_custom->id ?? ''}}"
     class="select2 {{$setting->setting_custom->class ?? ''}}" style="width: 100%; 
-    @if($setting->setting_custom->style)
+    @if(isset($setting->setting_custom->style))
     @foreach ($setting->setting_custom->style as $style_name => $style_value)
     {{$style_name}} : {{$style_value}};
     @endforeach @endif">
