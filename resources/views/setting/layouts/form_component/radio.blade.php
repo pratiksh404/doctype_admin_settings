@@ -14,7 +14,8 @@ if(isset($setting->setting_custom->type))
 <input type="radio"
     name="{{isset($setting->setting_custom->type) && isset($radio_name) ? $radio_name : 'integer_value' }}"
     value="{{$option_value}}"
-    {{$setting->$radio_name == $option_value ? 'checked' : isset($setting->setting_custom->checked) && $setting->setting_custom->checked == $option_value ? 'checked' : ''}}>
+    {{$setting->$radio_name == $option_value ? 'checked' : isset($setting->setting_custom->checked) && $setting->setting_custom->checked == $option_value ? 'checked' : ''}}
+    class="{{$setting->setting_custom->class ?? ''}}" id="{{$setting->setting_custom->id ?? ''}}">
 <label>{{$option_name}}</label>
 <br>
 
