@@ -30,8 +30,7 @@ This Package includes two seed
 To use specific seed use(publish them first)
 
 ```sh
-php artisan db:seed --class=CategoriesTableSeeder //Seed this first
-php artisan db:seed --class=PostsTableSeeder // And then this
+php artisan db:seed --class=SettingsTableSeeder
 ```
 
 ### If you want to modify Stuffs do..
