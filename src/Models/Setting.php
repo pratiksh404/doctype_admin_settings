@@ -19,7 +19,6 @@ class Setting extends Model
             4 => 'Select Dropdown',
             5 => 'Radio',
             6 => 'Checkbox',
-            7 => 'Custom'
         ][$attribute];
     }
 

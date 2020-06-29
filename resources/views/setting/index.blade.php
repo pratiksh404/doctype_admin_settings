@@ -51,7 +51,6 @@
                                 <option value="4">Select Dropdown</option>
                                 <option value="5">Radio</option>
                                 <option value="6">Checkbox</option>
-                                <option value="7">Custom</option>
 
                             </select>
                         </div>
@@ -138,13 +137,6 @@
                             {{-----------------Checkbox Input -----------------}}
                             @include('setting::setting.layouts.form_component.checkbox')
                             {{-- ---------------------------------------------- --}}
-
-                            {{-----------------Custom Input -----------------}}
-                            @include('setting::setting.layouts.form_component.custom')
-                            {{-- ---------------------------------------------- --}}
-
-
-
 
                         </div>
                         <div class="col-lg-2 d-flex justify-content-around">

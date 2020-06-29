@@ -86,15 +86,31 @@ class SettingsServiceProvider extends ServiceProvider
     public function setting_value($key)
     {
         $key = str_replace(['"', '\''], ' ', $key);
-        $setting = \doctype_admin\Settings\Models\Setting::where('setting_name', trim($key))->first();
+        $valid_key = str_replace(" ", "_", Str::lower($key));
+
+        $setting = \doctype_admin\Settings\Models\Setting::where('setting_name', trim($valid_key))->first();
         if ($setting->setting_type == "Text" || $setting->setting_type == "Image") {
             return $setting->string_value;
         }
         if ($setting->setting_type == "Rich Text Box") {
             return $setting->text_value;
         }
-        if ($setting->setting_type == "Checkbox" || $setting->setting_type == "Select Dropdown") {
+        if ($setting->setting_type == "Select Dropdown") {
             return $setting->integer_value;
+        }
+        if ($setting->setting_type == 'Radio') {
+            if ($setting->setting_custom->type == "integer" || $setting->integer_value) {
+                return $setting->integer_value;
+            } elseif ($setting->setting_custom->type == "string" || $setting->string_value) {
+                return $setting->string_value;
+            } elseif ($setting->setting_custom->type == "boolean" || $setting->boolean_value) {
+                return $setting->setting_custom->type == "boolean" || $setting->boolean_value;
+            } else {
+                return $setting->integer_value ?? $setting->string_value ?? $setting->boolean_value;
+            }
+        }
+        if ($setting->setting_type == "Checkbox") {
+            return $setting->boolean_value;
         }
     }
 }
