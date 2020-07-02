@@ -22,11 +22,6 @@ composer require doctype_admin/Settings
 php artisan migrate
 ```
 
-This Package includes two seed
-
-- PostsTableSeeder
-- CategoriesTableSeeder
-
 To use specific seed use(publish them first)
 
 ```sh
