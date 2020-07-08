@@ -69,7 +69,7 @@ class SettingsServiceProvider extends ServiceProvider
         return [
             'prefix' => config('setting.prefix', 'admin'),
             'namespace' => 'doctype_admin\Settings\Http\Controllers',
-            'middleware' => config('setting.middleware', ['web', 'activity', 'auth'])
+            'middleware' => config('setting.middleware', ['web', 'activity', 'auth', 'role:admin'])
         ];
     }
 

@@ -21,5 +21,5 @@ return [
         | 
         | 
         */
-    "middleware" => ['web', 'auth', 'activity']
+    "middleware" => ['web', 'auth', 'activity', 'role:admin']
 ];
