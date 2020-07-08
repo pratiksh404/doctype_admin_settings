@@ -1,5 +1,14 @@
 @if ($setting->setting_type == 'Checkbox')
 <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+
+    <div class="d-flex justify-content-between">
+        <label for=""></label>
+        @if($setting->setting_name)
+        <span class="text-secondary">use
+            @<code>setting('{{$setting->setting_name}}')</code>
+        </span> @endif
+    </div>
+
     <input type="hidden" name="boolean_value">
     <input type="checkbox" class="custom-control-input {{$setting->setting_custom->class ?? ''}}"
         id="{{$setting->setting_name}} {{$setting->setting_custom->id ?? ''}}" name="boolean_value" value="true"

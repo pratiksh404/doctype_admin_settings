@@ -39,8 +39,8 @@ class SettingController extends Controller
         $setting->update([
             "string_value" => $request->string_value ?? null,
             "text_value" => $request->text_value ?? null,
-            "integer_value" => $request->integer_value ?? null
-
+            "integer_value" => $request->integer_value ?? null,
+            "boolean_value" => $request->boolean_value ?? null
         ]);
         $this->uploadImage($setting);
         Alert::success("Setting Stored", "Success");

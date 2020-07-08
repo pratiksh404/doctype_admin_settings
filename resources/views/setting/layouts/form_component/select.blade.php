@@ -1,5 +1,11 @@
 @if ($setting->setting_type == "Select Dropdown")
 @if (isset($setting->setting_custom->options))
+<div class="d-flex justify-content-between">
+    <label>{{$setting->setting_custom->label ?? $setting->setting_display_name()}}</label> @if($setting->setting_name)
+    <span class="text-secondary">use
+        @<code>setting('{{$setting->setting_name}}')</code>
+    </span> @endif
+</div>
 <select name="integer_value" id="select_value {{$setting->setting_custom->id ?? ''}}"
     class="select2 {{$setting->setting_custom->class ?? ''}}" style="width: 100%; 
     @if(isset($setting->setting_custom->style))

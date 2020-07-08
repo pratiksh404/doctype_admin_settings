@@ -3,13 +3,18 @@
 if(isset($setting->setting_custom->type))
 {
     if(trim($setting->setting_custom->type) == "integer") {$radio_name = "integer_value";}   
-    if(trim($setting->setting_custom->type) == "string") {$radio_name = "string_value";} 
-    if(trim($setting->setting_custom->type) == "boolean") {$radio_name = "boolean_value";}
+    elseif(trim($setting->setting_custom->type) == "string") {$radio_name = "string_value";} 
+    elseif(trim($setting->setting_custom->type) == "boolean") {$radio_name = "boolean_value";}
 }else{$radio_name = "integer_value";}
     ?>
+<div class="d-flex justify-content-between">
+    <label>{{$setting->setting_custom->label ?? $setting->setting_display_name()}}</label> @if($setting->setting_name)
+    <span class="text-secondary">use
+        @<code>setting('{{$setting->setting_name}}')</code>
+    </span> @endif
+</div>
 
 @foreach ($setting->setting_custom->options as $option_value => $option_name)
-
 
 <input type="radio"
     name="{{isset($setting->setting_custom->type) && isset($radio_name) ? $radio_name : 'integer_value' }}"

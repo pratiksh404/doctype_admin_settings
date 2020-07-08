@@ -4,6 +4,7 @@ namespace doctype_admin\Settings;
 
 
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -86,12 +87,19 @@ class SettingsServiceProvider extends ServiceProvider
     public function setting_value($key)
     {
         $key = str_replace(['"', '\''], ' ', $key);
-        $valid_key = str_replace(" ", "_", Str::lower($key));
+        $valid_key = trim(Str::lower($key));
 
-        $setting = \doctype_admin\Settings\Models\Setting::where('setting_name', trim($valid_key))->first();
-        if ($setting->setting_type == "Text" || $setting->setting_type == "Image") {
+        $setting = \doctype_admin\Settings\Models\Setting::where('setting_name', $valid_key)->first();
+
+        if ($setting->setting_type == "Text") {
             return $setting->string_value;
         }
+
+        if ($setting->setting_type == "Image") {
+
+            return asset('storage') . '/' . $setting->string_value;
+        }
+
         if ($setting->setting_type == "Rich Text Box") {
             return $setting->text_value;
         }
@@ -99,14 +107,20 @@ class SettingsServiceProvider extends ServiceProvider
             return $setting->integer_value;
         }
         if ($setting->setting_type == 'Radio') {
-            if ($setting->setting_custom->type == "integer" || $setting->integer_value) {
-                return $setting->integer_value;
-            } elseif ($setting->setting_custom->type == "string" || $setting->string_value) {
-                return $setting->string_value;
-            } elseif ($setting->setting_custom->type == "boolean" || $setting->boolean_value) {
-                return $setting->setting_custom->type == "boolean" || $setting->boolean_value;
-            } else {
-                return $setting->integer_value ?? $setting->string_value ?? $setting->boolean_value;
+
+            if ($setting->setting_custom) {
+                $setting_custom = json_decode($setting->setting_custom);
+                $type = $setting_custom->type ? trim($setting_custom->type) : false;
+
+                if ($type == "integer" || $setting->integer_value) {
+                    return $setting->integer_value;
+                } elseif ($type == "string" || $setting->string_value) {
+                    return $setting->string_value;
+                } elseif ($type == "boolean" || $setting->boolean_value) {
+                    return $setting->boolean_value;
+                } else {
+                    return $setting->integer_value ?? $setting->string_value ?? $setting->boolean_value;
+                }
             }
         }
         if ($setting->setting_type == "Checkbox") {
