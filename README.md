@@ -1,6 +1,5 @@
 ![Doctype Admin Setting](https://github.com/pratiksh404/doctype_admin_settings/blob/master/screenshots/doctype_admin_settings.jpg)
-[![Issues](https://img.shields.io/github/issues/pratiksh404/doctype_admin_settings)](https://github.com/pratiksh404/doctype_admin_settings/issues)
-[![Stars](https://img.shields.io/github/stars/pratiksh404/doctype_admin_settings)](https://github.com/pratiksh404/doctype_admin_settings/stargazers)
+[![Issues](https://img.shields.io/github/issues/pratiksh404/doctype_admin_settings)](https://github.com/pratiksh404/doctype_admin_settings/issues) [![Stars](https://img.shields.io/github/stars/pratiksh404/doctype_admin_settings)](https://github.com/pratiksh404/doctype_admin_settings/stargazers) ![Downloads](https://poser.pugx.org/drh2so4/thumbnail/downloads)
 
 ## Laravel 7 Admin Panel Settings Plugin for lazy developers.
 

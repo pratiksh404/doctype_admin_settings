@@ -11,9 +11,11 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "orchestra/testbench": "5.x-dev",
     "intervention/image": "^2.4@dev",
-    "realrashid/sweet-alert": "dev-master"
+    "realrashid/sweet-alert": "^2.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "5.x-dev"
   },
   "autoload": {
     "psr-4": {
