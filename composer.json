@@ -12,7 +12,7 @@
   "minimum-stability": "dev",
   "require": {
     "intervention/image": "^2.4@dev",
-    "realrashid/sweet-alert": "^2.0"
+    "realrashid/sweet-alert": "^3.0"
   },
   "require-dev": {
     "orchestra/testbench": "5.x-dev"
