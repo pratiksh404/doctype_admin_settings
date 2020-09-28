@@ -9,7 +9,6 @@ use Illuminate\Routing\Controller;
 use doctype_admin\Settings\Models\Setting;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image as Image;
-use RealRashid\SweetAlert\Facades\Alert as Alert;
 
 class SettingController extends Controller
 {
@@ -25,7 +24,6 @@ class SettingController extends Controller
     public function store(Request $request)
     {
         Setting::create($this->data());
-        Alert::success("Setting Created", "Success");
         return redirect(config('setting.prefix', 'admin') . '/' . 'setting');
     }
 
@@ -43,14 +41,12 @@ class SettingController extends Controller
             "boolean_value" => $request->boolean_value ?? null
         ]);
         $this->uploadImage($setting);
-        Alert::success("Setting Stored", "Success");
         return redirect(config('setting.prefix', 'admin') . '/' . 'setting');
     }
 
     public function destroy(Setting $setting)
     {
         $setting->delete();
-        Alert::error("Setting Deleted", "Success");
         return redirect(config('setting.prefix', 'admin') . '/' . 'setting');
     }
 
