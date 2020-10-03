@@ -77,8 +77,16 @@ class SettingsServiceProvider extends ServiceProvider
     {
         /* ------------Settings Blade Directive-------------- */
 
-        Blade::directive('setting', function ($key, $default) {
-            return $default ?? $this->setting_value($key);
+        Blade::directive('setting', function ($value) {
+            if (strpos($value, ',') !== false) {
+                list($key, $default) = explode(',', str_replace(['(', ')', ' ', "'"], '', $value));
+                if (isset($key)) {
+                    $setting_value = $this->setting_value(trim($key));
+                    return $setting_value != null || $setting_value != '' ? $setting_value : trim($default);
+                }
+            } else {
+                return $this->setting_value(trim($value));
+            }
         });
 
         /* ------------------------------------------------- */
