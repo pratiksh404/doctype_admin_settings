@@ -12,7 +12,7 @@
 Run Composer Require Command
 
 ```sh
-composer require doctype_admin/Settings
+composer require doctype_admin/settings
 ```
 
 ## Then migrate database
