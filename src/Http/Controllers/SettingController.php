@@ -76,8 +76,8 @@ class SettingController extends Controller
                 "string_value" => request()->file('string_value')->store('uploads/setting', 'public')
             ]);
 
-            $image = Image::make(request()->file('string_value')->getRealPath())->fit($setting->setting_custom->image->fit->width ?? 800, $setting->setting_custom->image->fit->height ?? 800);
-            $image->save(public_path('storage/' . $setting->string_value), $setting->setting_custom->image->quality ?? 80);
+            $image = Image::make(request()->file('string_value')->getRealPath())->fit(json_decode($setting->setting_custom)->image->fit->width ?? 800, json_decode($setting->setting_custom)->image->fit->height ?? 800);
+            $image->save(public_path('storage/' . $setting->string_value), json_decode($setting->setting_custom)->image->quality ?? 80);
         }
     }
 }
